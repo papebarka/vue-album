@@ -1,4 +1,4 @@
-const albums = {
+export const albums = {
     namespaced: true,
 
     state(){
