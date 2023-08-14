@@ -4,6 +4,7 @@ import { computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import HelloWorld from './components/HelloWorld.vue'
 import Layout from './components/Layout.vue'
+import Album from './components/Album.vue'
 
 const store = useStore()
 
@@ -13,6 +14,10 @@ onMounted(async () => {
 
 const albums = computed(() => {
   return store.state.albums.all
+})
+
+const photos = computed(() => {
+  return store.state.photos.all
 })
 </script>
 
@@ -24,16 +29,19 @@ const albums = computed(() => {
       </template>
 
       <template v-slot:sidebar>
-        <div
+        <album
           v-for="album in albums"
           :key="album.id"
-        >
-          {{ album.title }}
-        </div>
+          :album="album"
+        />
       </template>
 
       <template v-slot:content>
-        Content
+        <img 
+          v-for="photo in photos"
+          :key="photo.id"
+          :src="photo.thumbnailUrl"
+        />
       </template>
   </layout>
 
