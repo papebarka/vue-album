@@ -1,12 +1,9 @@
 <script setup>
 import { defineProps } from 'vue'
 import { useStore } from 'vuex'
+import { RouterLink } from 'vue-router'
 
 const store = useStore()
-
-const click = () => {
-    store.dispatch('photos/getByAlbum', {album: props.album})
-}
 
 const props = defineProps({
     album: {
@@ -17,13 +14,13 @@ const props = defineProps({
 </script>
 
 <template>
-    <button @click="click">
+    <router-link :to="`/albums/${album.id}`">
         {{ album.title  }}
-    </button>
+    </router-link>
 </template>
 
 <style scoped>
-button {
+a {
   background: darkcyan;
   color: white;
   border: none;
@@ -39,7 +36,7 @@ button {
   font-family: Arial;
 }
 
-button:hover {
+a:hover {
   filter: brightness(120%);
   cursor: pointer;
   transition: .1s;

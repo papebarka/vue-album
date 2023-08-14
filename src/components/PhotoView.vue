@@ -1,11 +1,22 @@
 <script setup>
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, watchEffect } from 'vue'
 import { useStore } from 'vuex'
+import { useRoute } from 'vue-router'
 
 const store = useStore()
 
+const route = useRoute()
+
 onMounted(async () => {
   store.dispatch('albums/fetch')
+})
+
+watchEffect( () => {
+    const id = route.params.id
+    if (!id){
+        return
+    }
+    store.dispatch('photos/getByAlbum', {albumId: id})
 })
 
 const photos = computed(() => {
