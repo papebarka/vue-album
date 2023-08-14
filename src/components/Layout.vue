@@ -5,9 +5,13 @@
         </div>
 
         <div class="main">
-            <slot name="sidebar" />
+            <div class="sidebar">
+                <slot name="sidebar" />
+            </div>
 
-            <slot name="content" />
+            <div class="content">
+                <slot name="content" />
+            </div>
         </div>
 
     </div>
